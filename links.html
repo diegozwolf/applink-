@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Links app</title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+<!-- Compiled and minified CSS Materialize -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+</head>
+
+<body ng-app="app" ng-controller='LinkController as link'>
+
+<!-- Nav bar -->
+<nav class="navbar navbar-default navd">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <p>Interest links</p>
+      </a>
+      <a href="#" class="btn btn-primary" role="button" ng-click="logIn()">Entrar</a> 
+    </div>
+  </div>
+</nav>
+
+<!-- botones -->
+<div class="row">
+<!-- Añadir un link -->
+	<div class="row button center">
+		<a class="btn-floating btn-large waves-effect waves-light addnew" id="agregar" ng-click="addLink()">
+			<i class="material-icons">+</i>
+		</a>
+	</div>
+</div>
+<!-- Componente de link -->
+
+		
+			<div class="col-md-6 col-md-offset-3 linkcomp" ng-repeat="link in links">
+  				<h5>{{link.name}}</h5>
+  				<p>{{link.topic}}</p>
+  				<h4>{{link.title}}</h4>
+  				<a href="#"><p>{{link.url}}</p></a>
+  			</div>
+  		</div>
+
+<!-- Angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBAuefx5J3CCE6j2JGq-2YKqU0wTAHm7h4",
+    authDomain: "link-diego.firebaseapp.com",
+    databaseURL: "https://link-diego.firebaseio.com",
+    storageBucket: "link-diego.appspot.com",
+    messagingSenderId: "200110209748"
+  };
+  firebase.initializeApp(config);
+//Código de Angular
+//modulo
+ var app = angular.module("app", ["firebase"]);
+//controllador
+ app.controller('LinkController',['$scope', '$firebaseArray',/*"$firebaseAuth",*/function($scope, $firebaseArray/*,$FirebaseAuth*/){
+ 	/*var auth = $firebaseAuth();*/
+ 	var ref = firebase.database().ref('links');
+ 	$scope.links = $firebaseArray(ref);
+
+ 	$scope.addLink = function(){
+ 		$scope.links.$add({
+ 			name: "Diego Z",
+ 			topic: "Design",
+ 			title: "Feedback, feedback everywhere!",
+ 			url: "http://www.a.com.mx/ver_articulo.php?id=26"
+ 		});
+ 	};
+ }]);
+
+
+</script>
+
+</body>
+</html>

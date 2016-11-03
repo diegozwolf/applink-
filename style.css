@@ -1,0 +1,23 @@
+body {
+	background-color: #ccc;
+}
+a{
+	text-align: center;
+	
+}
+.navd {
+	background-color: #283593;	
+}
+.navd p{
+	color: white;
+}
+.linkcomp{
+	width: 600px;
+	background-color: white;
+	height: 250px;
+	box-shadow: 3px 3px 2px #888888;
+	margin-top: 20px
+}
+#agregar{
+	background-color: #E91E63;
+}
